@@ -1,36 +1,27 @@
 package it.poliyo.tdp.ufo.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.List;
+
+/**
+ * MAIN chiama solo i METODI DAO
+ * La classe DAO ha solo i metodi JDBC da fare
+ * MAIN è solo il CHIAMANTE
+ * 
+ * @param args
+ */
 
 public class TestDB {
 
 	public static void main(String[] args) {
 		
-		/** ? introduce serie di parametri
-		*   & concatenazione di info
-		*/
+		SightingDAO dao = new SightingDAO();
 		
-		String jdbcURL = "jdbc:mysql://localhost/ufo_sightings?user=root&password=240899SQL";
-
+		List <String> formeUFO = dao.readShapes();
 		
-		//METODO STATICO di Driver Manager --> creo CONNESSIONE
-		// tutte le operazioni colm DB possono sempre generare ECCEZIONI
-		
-		try {
-			Connection conn = DriverManager.getConnection(jdbcURL);
-			
-			
-			
-			
-			// CHIUSURA connessione --> numero limitato di connessioni aperte contemporanee
-			conn.close();
-		}catch(SQLException e) {
-			e.printStackTrace();
+		for(String forma: formeUFO) {
+			int count = dao.countByShape(forma);
+			System.out.println("Ufo di forma "+forma+" sono: "+count);
 		}
-		
-		
 	}
 
 }
