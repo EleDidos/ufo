@@ -23,11 +23,9 @@ public class SightingDAO {
 			//CHIEDE CONNECT a DB Connect
 			Connection conn= DBConnect.getConnestion();
 		
-			String sql = "SELECT DISTINCT shape" //prende tutte le differenti forme
-
-				+ "FROM sighting"
-				+ "WHERE shape <> ' ' "
-				+"ORDER BY shape ASC";
+			//prende tutte le forme dal file "sighting" dove forma è diverso da stringa vuota
+			//e le ordina in maniera ascendente
+			String sql = "SELECT DISTINCT shape FROM sighting WHERE shape<>'' ORDER BY shape ASC";
 		
 			PreparedStatement st = conn.prepareStatement(sql);
 		
@@ -61,13 +59,12 @@ public class SightingDAO {
 			Connection conn= DBConnect.getConnestion();
 			
 			String sql2 = "SELECT COUNT(*) AS cnt FROM sighting WHERE shape= ?";
-			String shapeScelta = "circle"; //cerco forma decisa qui
 		
 		//PREPARO LO STATEMENT
 			PreparedStatement st2 = conn.prepareStatement(sql2);
 		
-		//SOSTITUISCO AL ? della query il valore di SHAPESCELTA
-			st2.setString(1, shapeScelta);
+		//SOSTITUISCO AL ? della query il valore di SHAPE scelta dall'utente dalla tendina
+			st2.setString(1, shape);
 			ResultSet res2 = st2.executeQuery();
 			res2.first();
 		
