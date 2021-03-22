@@ -1,4 +1,4 @@
-package it.poliyo.tdp.ufo.db;
+package it.polito.tdp.ufo.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
