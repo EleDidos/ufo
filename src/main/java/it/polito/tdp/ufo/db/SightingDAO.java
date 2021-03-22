@@ -23,7 +23,7 @@ public class SightingDAO {
 			//CHIEDE CONNECT a DB Connect
 			Connection conn= DBConnect.getConnestion();
 		
-			String sql = "SELECT DISTINCT shape"
+			String sql = "SELECT DISTINCT shape" //prende tutte le differenti forme
 
 				+ "FROM sighting"
 				+ "WHERE shape <> ' ' "
@@ -33,6 +33,10 @@ public class SightingDAO {
 		
 			ResultSet res = st.executeQuery(sql);
 		
+			
+			//metto tutte le forme trovate in una lista
+			//scandisco la lista con un NEXT, riga dopo riga
+			//il contenuto di ogni riga lo inserisco nella lista forme
 			List<String> formeUFO = new ArrayList <>();
 			while (res.next()) {
 				String forma = res.getString("shape");
